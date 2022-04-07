@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Camara : MonoBehaviour
 {
-    Transform jugador;
-    void Start()
-    {
-        jugador = GameObject.Find("Jugador").transform;
-    }
+    [SerializeField] Transform _jugador;
 
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.LookAt(jugador);
+        transform.LookAt(_jugador);
     }
 }

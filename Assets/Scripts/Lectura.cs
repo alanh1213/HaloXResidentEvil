@@ -5,7 +5,6 @@ using TMPro;
 
 public class Lectura : MonoBehaviour
 {
-    [SerializeField] private string mensaje = "";
     public TextMeshProUGUI textDisplay;
     [SerializeField] private string[] sentences;
     private int index;
@@ -39,14 +38,16 @@ public class Lectura : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        this.other = other;    
+        if(other.CompareTag("Player")){
+            this.other = other;   
+        }
     }
     void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !_enTexto)
         {
             index = 0; //---> Resetea el index asi puede volver a leerse
-            other.GetComponent<Jugador_Movimiento>().enabled = false;
+            other.GetComponent<Jugador>().enabled = false;
             StartCoroutine("Escribir");
         }
     }
@@ -85,7 +86,7 @@ public class Lectura : MonoBehaviour
         {
             textDisplay.text = "";
             _enTexto = false;
-            other.GetComponent<Jugador_Movimiento>().enabled = true;
+            other.GetComponent<Jugador>().enabled = true;
         }
     }
 }
